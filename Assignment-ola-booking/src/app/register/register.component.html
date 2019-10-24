@@ -1,0 +1,45 @@
+<div class="container mt-5">
+  <div class="text-center mb-5">
+    <h1>OLA Bookings</h1>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Register</h5>
+      <form (ngSubmit)="registerUser(f)" #f="ngForm">
+        <div class="form-group">
+          <label for="name" class="required">Full Name</label>
+          <input ngModel required type="text" class="form-control" name="name" aria-describedby="emailHelp"
+            placeholder="Enter full name">
+        </div>
+        <div class="form-group">
+          <label for="email" class="required">Email address</label>
+          <input #email="ngModel" (change)="changeErrorMsg()" ngModel required type="email"
+            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" class="form-control" name="email"
+            aria-describedby="emailHelp" placeholder="Enter email" />
+
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          <div *ngIf="email.errors && (email.dirty || email.touched)">
+            <div *ngIf="!f.submitted && email.errors.required" class="alert alert-danger" role="alert"> Enter E-mail
+              Address </div>
+            <div *ngIf="email.errors.pattern" class="alert alert-danger" role="alert"> Enter Valid E-mail Address </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password" class="required">Password</label>
+          <input ngModel required type="password" class="form-control" name="password" placeholder="Password">
+        </div>
+        <div *ngIf="errorMesssage" class="alert alert-danger" role="alert">
+          Email: {{errorEmail}} already exist!
+        </div>
+        <div class="row">
+          <div class="mt-3 col-6">
+            <button type="submit" [disabled]="!f.valid" class="btn btn-primary col">Register</button>
+          </div>
+          <div class="mt-3 col-6">
+            <button routerLink="/login" type="button" class="btn btn-primary col">Log in</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

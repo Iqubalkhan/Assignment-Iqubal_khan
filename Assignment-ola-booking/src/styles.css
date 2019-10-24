@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+
+.container{
+    width: 500px; 
+    margin: 0 auto;
+}
+
+.bg-primary {
+    background-color: #888!important;
+}
+
+@media only screen and (max-width: 600px) {
+    .container{
+        width: 350px; 
+        margin: 0 auto;
+    }
+    .margin-top-70 {
+        margin-top:200px!important;
+    }
+    .margin-top-100 {
+        margin-top:200px!important;
+    }
+
+    
+  }
+
+  .required:after {
+    content: "*";
+    color: red;
+}
+
+ 

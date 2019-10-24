@@ -1,0 +1,69 @@
+<div class="container margin-top-70">
+  <div class="text-center mb-5">
+    <h1>Ride with us</h1>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <form (ngSubmit)="confirmCab(f)" #f="ngForm">
+        <div class="form-group">
+          <label  for="from" class="required">Select Pick up location</label>
+          <select ngModel required class="custom-select" id="from" name="from" [(ngModel)]="selectedFrom">
+            <option disabled selected value="none">Select Pick up location</option>
+            <option *ngFor="let pickupLocation of depart; index" [value]="pickupLocation"
+              [disabled]='selectedTo === pickupLocation'>
+              {{pickupLocation}}
+            </option>
+
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="to" class="required">Select drop location</label>
+          <select [disabled]="!selectedFrom" ngModel required [(ngModel)]="selectedTo" class="custom-select" id="to"
+            name="to">
+            <option disabled selected value="none">Select drop location</option>
+            <option *ngFor="let dropLocation of destination" [value]="dropLocation"
+              [disabled]='dropLocation === selectedFrom'>
+              {{dropLocation}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="date" class="required">Select Booking Date</label>
+          <input ngModel required class="form-control" type="date" id="date" name="travelDate" [(ngModel)]="travelDate"
+            [min]="maxDate">
+        </div>
+
+        <button [disabled]='selectedFrom=="none" || selectedTo=="none" || travelDate==undefined || !f.valid'
+          type="submit" class="btn btn-primary">Book</button>
+      </form>
+    </div>
+  </div>
+
+
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="myModal" style="display: block" *ngIf="showDialogue">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Confirm Booking</h4>
+        <button type="button" class="close" data-dismiss="modal" (click)="cancelCab()">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Total fare: {{totalFare}}&#8377;
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="bookAcab()">Confirm</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancelCab()">Cancel</button>
+      </div>
+
+    </div>
+  </div>
+</div>
