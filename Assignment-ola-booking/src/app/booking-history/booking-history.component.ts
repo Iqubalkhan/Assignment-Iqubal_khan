@@ -26,7 +26,7 @@ export class BookingHistoryComponent implements OnInit {
     this.bookingHistoryArray = this.store.select('bookingHistory');
     this.bookingHistoryArray.subscribe(result => {
       result.allBookings.forEach(entry => {
-        if (entry.emailId == this.emailId) {
+        if (entry.EmailId == this.emailId) {
           this.listItems.push(entry);
         }
       })

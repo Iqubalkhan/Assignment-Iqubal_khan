@@ -7,6 +7,7 @@ import { bookingReducer } from './store/booking.reducer';
 import { AdBooking } from './store/booking.actions';
 import { UserSession } from 'src/shared/user-session';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking-window',
@@ -31,7 +32,7 @@ export class BookingWindowComponent implements OnInit {
   // constructor(private store: Store<{bookingHistory:{allBookings:Booking[]}}>,
   //   private sessionStore: Store<{createSession:{getsession:UserSession}}>) { }
 
-  constructor(private store: Store<any>) { }
+  constructor(private store: Store<any>, private router:Router) { }
 
   ngOnInit() {
     this.depart = this.startFrom;
@@ -56,6 +57,10 @@ export class BookingWindowComponent implements OnInit {
   confirmCab(form: NgForm) {
     this.totalFare = Math.floor(8000 + Math.random() * 1000)
     this.showDialogue = true;
+    console.log(this.emailId);
+    if(this.emailId==undefined){
+      this.router.navigate(['/login']);
+    }
     this.cabForm = form;
   }
   cancelCab() {
@@ -68,10 +73,11 @@ export class BookingWindowComponent implements OnInit {
     this.showDialogue = false;
     const values = this.cabForm.value;
     const value = this.cabForm.value;
-    const bookedCab = new Booking(value.from, value.to, value.travelDate, this.emailId);
+    const bookedCab = new Booking(value.from, value.to, value.travelDate, this.totalFare ,this.emailId);
     this.store.dispatch(new AdBooking(bookedCab));
     this.cabForm.reset();
     this.reload();
+    this.router.navigate(['/dashboard/history']);
   }
 
   reload() {

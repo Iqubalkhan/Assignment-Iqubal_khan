@@ -28,5 +28,8 @@
     content: "*";
     color: red;
 }
+.bold-font{
+    font-weight: bold;
+}
 
  

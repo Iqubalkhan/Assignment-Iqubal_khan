@@ -1,6 +1,5 @@
 import { Action } from '@ngrx/store';
 import * as bookingActions from './booking.actions'
-import { Booking } from 'src/shared/booking.model';
 
 const initialState = {
     allBookings: []
