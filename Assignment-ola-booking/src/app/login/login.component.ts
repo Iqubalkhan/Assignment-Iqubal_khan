@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     const sessionStartWith = new UserSession(false, new User("", "", ""));
     this.store.dispatch(new createSession(sessionStartWith));
-    this.router.navigate(['/login']);
   }
 
   login(form: NgForm) {
